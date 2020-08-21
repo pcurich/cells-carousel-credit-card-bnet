@@ -124,13 +124,15 @@ img {
   cursor: pointer; }
 
 .box-nav {
-  background-image: linear-gradient(to bottom, #fefefe, #f6f8f9);
+  background-image: linear-gradient(to bottom, #fff, #fff);
   text-align: center;
-  color: #b9c5d2;
-  border: 1px solid #d5e2ee;
+  color: #55c1ff;
+  border: 0px solid #d5e2ee;
   border-radius: 3px;
   font-weight: bold;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 30px;
+  font-family: monospace; }
 
 .box:hover, .box:active, .box:focus {
   border: 1px solid #d5e2ee;
