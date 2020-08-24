@@ -72,6 +72,7 @@ resize(){
     let offSet = widthParent - this.widthItem*this.elements;
     this.justifyContent = offSet/(this.elements+1);
     this.shadowRoot.querySelector('.carousel__list').style.left = '0px';
+    this.nSteps = 0;
 }
 
 toPrev(e) {
