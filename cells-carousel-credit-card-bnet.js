@@ -27,22 +27,31 @@ export class CellsCarouselCreditCardBnet extends LitElement {
         height: { type:Number },
         widthItem: { type:Number },
         marginTopArrow: { type:Number },
+        initialJustifyContent: { type:Number  },
+        justifyContent: { type:Number, reflect:true },
         widthTotal: { type:String },
-        btnArrow: { type:Number },
-        nDisplay: { type:Number },
+        btnArrow: { type:Number }, 
         data: { type:Array },
+        elements: {type:Number},
+        nSteps: {type:Number},
+        speed: {type:Number},
         _pathImages: { type: String },
+        _isMoving: { type: Boolean },
     };
 }
 
 constructor() {
     super();
-    this.marginTopArrow = '100px';
-    this.btnArrow = '34px';
+    this.marginTopArrow = '150px';
+    this.btnArrow = '40px';
     this.height = 280;  
-    this.widthItem = 200;
-    this.nDisplay = 3;
+    this.widthItem = 200; 
+    this.justifyContent = 10
+    this.initialJustifyContent = this.justifyContent
+    this.nSteps = 0;
+    this.speed = 5;
     this._pathImages = this._getComponentPath('resources/images/subcategories/');
+    this._isMoving = false;
 }
 
 _getComponentPath(path) {
@@ -54,63 +63,72 @@ static get shadyStyles() {
     ${styles.cssText}
     ${getComponentSharedStyles('cells-card-carousel-bnet-shared-styles').cssText}
     `;
-} 
+}
+
+resize(){ 
+    let carouselList = this.shadowRoot.querySelector('.carousel__list');
+    let widthParent = carouselList.offsetWidth; 
+    this.elements = parseInt(widthParent/(this.widthItem + this.initialJustifyContent));
+    let offSet = widthParent - this.widthItem*this.elements;
+    this.justifyContent = offSet/(this.elements+1);
+    this.shadowRoot.querySelector('.carousel__list').style.left = '0px';
+}
 
 toPrev(e) {
-    let carouselList = this.shadowRoot.querySelector('.carousel__list');
-    let left = carouselList.style.left.replace('px','')*1;
-    let right = 0
-
-    if (left !== 0) {
-        if (left > 0) {
-            carouselList.style.left = '0px'
-        } else {
-            right = (this.widthItem)+left+20
-        }
-        if (right >0 ) {
-            this.animation(left,0);
-        } else {
-            this.animation(left,right);
-        }
-        this.shadowRoot.querySelector('.carousel-count').value--
-    }
+  debugger 
+  if(this._isMoving === false){
+    this.nSteps = this.nSteps - 1; 
+    if (this.nSteps >= 0){ 
+      this.move(1);
+    }else{
+      this.nSteps = 0;
+    } 
+  }
 }
 
 toNext(e) {
-    let carousel = this.shadowRoot.querySelector('.carousel');
-    let carouselList = this.shadowRoot.querySelector('.carousel__list');
-    let left = carouselList.style.left.replace('px','') * 1;
-    let right = (this.widthItem*-1)+left - 20;
-
-    let carouselCount = this.shadowRoot.querySelector('.carousel-count')
-    let carouselTotal = this.shadowRoot.querySelector('.carousel-total')
-    carouselTotal.value =  Math.trunc(carousel.offsetWidth/this.widthItem)
-
-    if(carouselCount.value < 0){
-        carouselCount.value = 0;
+  debugger 
+  if(this._isMoving === false){
+    this.nSteps = this.nSteps + 1; 
+    if (this.nSteps <= Math.ceil((this.data.length/this.elements))){ 
+      this.move(-1);
+    }else{
+      this.nSteps = this.nSteps - 1;
     }
-
-    if( (carouselCount.value*1 + carouselTotal.value*1) <= this.data.length + 1 ){
-        this.animation(left ,right);
-        carouselCount.value = carouselCount.value * 1 + 1;
-    }
-}
-
-animation(from, to){
-let elem = this.shadowRoot.querySelector('.carousel__list');
-let pos = from;
-let offSet = Math.abs(to)<Math.abs(from)? 1 : -1;
-
-let id = setInterval(frame, 0);
-  function frame() {
-    pos = pos+offSet;
-    elem.style.left = pos + 'px';
-      if (Math.abs(pos) == Math.abs(to)) {
-        elem.style.left = pos + 'px';
-        clearInterval(id);
-      }
   }
+    
 }
+
+move(direction){
+  let carouselList = this.shadowRoot.querySelector('.carousel__list');
+  let left = carouselList.style.left.replace('px','') * 1; 
+  let right = parseInt((this.justifyContent + this.widthItem)*this.elements);
+  // this.shadowRoot.querySelector('.carousel-count').value = this.nSteps;
+  // this.shadowRoot.querySelector('.carousel-total').value = right;
+  // this.shadowRoot.querySelector('.carousel-data').value = this.data.length;
+  // this.shadowRoot.querySelector('.carousel-elements').value = this.elements;
+  // this.shadowRoot.querySelector('.carousel-steps').value = Math.ceil(this.data.length/this.elements);
+  // this.shadowRoot.querySelector('.carousel-moving').value = this._isMoving;
+  this.animation(left ,right, this.speed*direction);
+}
+
+animation(from, to , offSet){
+this._isMoving = true;
+let elem = this.shadowRoot.querySelector('.carousel__list');
+let pos = from; 
+let start = 0;
+let id = setInterval(()=> {
+  pos = pos+offSet;
+  elem.style.left = pos + 'px';
+  start = start + offSet 
+    if (Math.abs(start) >= Math.abs(to)) {
+      elem.style.left = pos + 'px';
+      this._isMoving = false; 
+      clearInterval(id); 
+    }
+}, 0); 
+}
+
 
 setSelectedCategory(categoryId) {
 const target = this.shadowRoot.querySelector('#cat' + categoryId);
@@ -159,12 +177,12 @@ let raiseEvent = new CustomEvent('cells-card-carousel-bnet-selected',
 this.dispatchEvent(raiseEvent);
 }
 
-_templateDetails(){
+_element(){
 return html`
-  <div class="carousel__list">
+  <div  class="carousel__list" >
     ${
       this.data.map((v,i)=> html`
-      <div data-id="${v.code}" id="cat${v.code}" class="carousel__item cursor" style="width:${this.widthItem+'px'}" @click=${this.selectedCategory} >
+      <div data-id="${v.code}" id="cat${v.code}" class="carousel__item cursor" style='width:${this.widthItem+"px"}; margin:10px ${this.justifyContent+"px"} 10px ${i==0? this.justifyContent+"px":"0px"};' @click=${this.selectedCategory} >
         <div class="flex-container box" >
         
           <div id="icon${v.code}" class='${v.selected? "active": "no-active"} push-right'>
@@ -177,7 +195,7 @@ return html`
 
           <div class="sections">
             <div class="section-information">
-              <div class="title">${v.title}</div>
+              <div class="title">${v.title} + ${i}</div>
               <div class="sub-title">${v.number}</div>
             </div>
 
@@ -200,17 +218,23 @@ return html`
 render() {
 return html`
     <style>${this.constructor.shadyStyles}</style>
-    <div class="carousel js-carousel">
-        <input class="carousel-total" type="text" style="display:none;"/>
-        <input class="carousel-count" type="text" style="display:none;"/>
+
+    <!-- Ancho<input class="carousel-total" type="text" style="display:none;"/><br>
+    posicion<input class="carousel-count" type="text" style="display:none;"/><br> 
+    Elmentos<input class="carousel-elements" type="text" style="display:none;"/><br> 
+    Data<input class="carousel-data" type="text" style="display:none;"/><br> 
+    total<input class="carousel-steps" type="text" style="display:none;"/><br> 
+    Se mueve<input class="carousel-moving" type="text" style="display:none;"/><br>  -->
+    
+    <div class="carousel">
         <div class="carousel__nav">
-            <button class="js-carousel-button box-nav" style='height:${this.btnArrow};width:${this.btnArrow};  margin-top:${this.marginTopArrow};'  @click=${this.toPrev} data-dir="prev">&lt;</button>
+            <button class="box-nav" style='height:${this.btnArrow};width:${this.btnArrow};  margin-top:${this.marginTopArrow};'  @click=${this.toPrev} data-dir="prev">&lt;</button>
         </div>
-        <div class="carousel__container js-carousel-container" style="height:${this.height+'px'};"  >
-            ${this._templateDetails()}
+        <div class="carousel__container" style="height:${this.height+'px'}; background-color:#F6F9FF; width: 100%;"  > 
+          ${this._element()}
         </div>
         <div class="carousel__nav">
-            <button class="js-carousel-button box-nav" style='height:${this.btnArrow};width:${this.btnArrow};  margin-top:${this.marginTopArrow};'  @click=${this.toNext} data-dir="next">&gt;</button>
+            <button class="box-nav" style='height:${this.btnArrow};width:${this.btnArrow};  margin-top:${this.marginTopArrow};'  @click=${this.toNext} data-dir="next">&gt;</button>
         </div>
     </div>
 `;

@@ -6,10 +6,7 @@ export default css`:host {
   @apply --cells-carousel-bnet-parent; }
 
 .carousel {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0px; }
+  display: flex; }
 
 .carousel__button--prev, .carousel__button--next {
   position: absolute;
@@ -23,9 +20,7 @@ export default css`:host {
   right: 0; }
 
 .carousel__container {
-  overflow: hidden;
-  margin-left: 15px;
-  margin-right: 15px; }
+  overflow: hidden; }
 
 .carousel__list {
   position: relative;
@@ -36,12 +31,11 @@ export default css`:host {
 .carousel__item {
   flex-shrink: 0;
   text-align: center;
-  margin: 10px;
+  margin: 10px 5px 10px 5px;
   opacity: 1; }
 
 .flex-container {
   height: 100%;
-  box-shadow: 0 3px 4px 0 rgba(8, 8, 8, 0.19);
   display: flex;
   flex-direction: column; }
 
@@ -92,18 +86,14 @@ img {
 
 .push-right {
   text-align: end;
-  margin: 10px 10px 5px 5px; }
-
-.carousel__item:hover {
-  /* box-shadow: 0px 0px 10px 2px rgba(25, 115, 184,0.5) */
-  border: 2px solid #55c1ff;
-  opacity: 1; }
+  margin: 5px 5px 0px 0px; }
 
 .carousel__item-hover {
   /* box-shadow: 0px 0px 10px 2px rgba(25, 115, 184,0.5) */
   border: 2px solid #55c1ff;
   color: #55c1ff;
-  opacity: 1; }
+  opacity: 1;
+  border-radius: 6px; }
 
 .flex-row {
   display: flex;
@@ -119,16 +109,16 @@ img {
   background-image: linear-gradient(to bottom, #fefefe, #f6f8f9);
   text-align: center;
   color: #b9c5d2;
-  border-radius: 3px;
+  border-radius: 6px;
   font-weight: bold;
+  border: 1px solid #d0dcf3;
   cursor: pointer; }
 
 .box-nav {
-  background-image: linear-gradient(to bottom, #fff, #fff);
+  background-color: transparent;
   text-align: center;
   color: #55c1ff;
-  border: 0px solid #d5e2ee;
-  border-radius: 3px;
+  border: 1px solid #d5e2ee;
   font-weight: bold;
   cursor: pointer;
   font-size: 30px;
@@ -136,5 +126,5 @@ img {
 
 .box:hover, .box:active, .box:focus {
   border: 1px solid #d5e2ee;
-  outline: inherit; }
+  /*outline: inherit;*/ }
 `;
