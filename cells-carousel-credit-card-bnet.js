@@ -196,7 +196,7 @@ return html`
 
           <div class="sections">
             <div class="section-information">
-              <div class="title">${v.title} + ${i}</div>
+              <div class="title">${v.title}s</div>
               <div class="sub-title">${v.number}</div>
             </div>
 
