@@ -12,7 +12,7 @@ export class CellsCarouselCreditCardBnet extends LitElement {
     return {
       height: {type: Number },
       widthItem: {type: Number },
-      marginTopArrow: {type: Number },
+      marginTopArrow: {type: String },
       initialJustifyContent: {type: Number },
       justifyContent: {type: Number, reflect: true },
       widthTotal: {type: String },
