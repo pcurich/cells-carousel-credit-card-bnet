@@ -93,7 +93,8 @@ img {
   border: 2px solid #55c1ff;
   color: #55c1ff;
   opacity: 1;
-  border-radius: 6px; }
+  border-radius: 6px;
+  padding-bottom: 2px; }
 
 .flex-row {
   display: flex;
