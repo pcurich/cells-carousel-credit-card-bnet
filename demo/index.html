@@ -29,15 +29,16 @@
       import '../build/demo-build.js';
     </script>
     <script>
-      document.addEventListener('DOMContentLoaded',()=>{
-        let resizer = new ResizeObserver(handleResize);
-        resizer.observe(document.getElementById('component'))
-      })
-
-      function handleResize(entries){
-        var component = document.getElementById('component')
+      function handleResize(entries) {
+        var component = document.getElementById('component');
         component.resize();
       }
+
+      document.addEventListener('DOMContentLoaded', ()=>{
+        let resizer = new ResizeObserver(handleResize);
+        resizer.observe(document.getElementById('component'));
+      });
+
     </script>
   </head>
 
@@ -45,29 +46,28 @@
     <cells-demo-helper>
       <cells-demo-case heading="Basic" description="Default specs">
         <template>
-          <div >
+          <div>
             <cells-carousel-credit-card-bnet id="component"></cells-carousel-credit-card-bnet>
             <script>
               var component = document.getElementById('component');
               var data = [
-                {title:"VISA CLASICA",code:"11001",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11002",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11003",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11004",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11005",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11006",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11007",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11008",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11009",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11010",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11011",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11012",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11013",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11014",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11015",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                {title:"VISA CLASICA",code:"11016",selected:false, number: "4919-1000-0124-6974", cardPhoto: "https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png", titleLine:"Línea de crédito", creditLine: "S/ 2,500.00" },
-                
-              ] 
+                {title: 'VISA CLASICA', code: '11001', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11002', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11003', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11004', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11005', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11006', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11007', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11008', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11009', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11010', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11011', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11012', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11013', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11014', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11015', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' },
+                {title: 'VISA CLASICA', code: '11016', selected: false, number: '4919-1000-0124-6974', cardPhoto: 'https://cardcovers-stage.caasbbva.com/peru/491911_VISA-ORO_front.png', titleLine: 'Línea de crédito', creditLine: 'S/ 2,500.00' }
+              ];
               component.data = data;
             </script>
           </div>

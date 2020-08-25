@@ -119,7 +119,7 @@ img {
   background-color: transparent;
   text-align: center;
   color: #55c1ff;
-  border: 1px solid #d5e2ee;
+  border: 0px solid #d5e2ee;
   font-weight: bold;
   cursor: pointer;
   font-size: 30px;
